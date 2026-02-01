@@ -4,7 +4,8 @@ session_start();
 require_once 'config/database.php';
 
 // On récupère tous les films de la table 'films'
-$query = $pdo->query("SELECT * FROM films ORDER BY created_at DESC");
+//$query = $pdo->query("SELECT * FROM films ORDER BY created_at DESC");
+$query = $pdo->query("SELECT * FROM films ORDER BY id DESC");
 $films = $query->fetchAll();
 
 include 'includes/header.php'; 

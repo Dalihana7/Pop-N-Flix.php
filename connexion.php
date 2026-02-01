@@ -28,11 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <?php include 'includes/header.php'; ?>
 
 <main>
-    <div class="auth-container"> 
+    <div class="auth-container">
         <h2 class="section-title">Connexion</h2>
         <div class="grid-separator"></div>
         

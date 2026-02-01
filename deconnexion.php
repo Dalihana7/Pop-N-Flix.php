@@ -1,3 +1,4 @@
+<?php include 'includes/header.php'; ?>
 <?php
 session_start();
 
@@ -11,3 +12,4 @@ session_destroy();
 header('Location: connexion.php');
 exit;
 ?>
+<?php include 'includes/footer.php'; ?>

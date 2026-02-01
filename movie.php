@@ -2,57 +2,98 @@
 session_start();
 require_once 'config/database.php';
 
-// 1. Récupérer l'ID du film dans l'URL
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// 2. Chercher les infos du film et du réalisateur dans la base
 $stmt = $pdo->prepare("
-    SELECT f.*, r.nom AS realisateur_nom
-    FROM films f 
-    LEFT JOIN realisateurs r ON f.realisateur_id = r.id
-    WHERE f.id = ?
+    SELECT films.*, IFNULL(realisateurs.nom, 'Inconnu') AS nom_realisateur 
+    FROM films 
+    LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id 
+    WHERE films.id = ?
 ");
 $stmt->execute([$id]);
 $film = $stmt->fetch();
 
-// Si le film n'existe pas, on redirige vers l'accueil
-if (!$film) { header('Location: index.php'); exit; }
+if (!$film) {
+    header('Location: index.php');
+    exit;
+}
 
-include 'includes/header.php'; 
+$query_acteurs = $pdo->prepare("
+    SELECT a.* FROM acteurs a
+    JOIN films_acteurs fa ON a.id = fa.acteur_id
+    WHERE fa.film_id = ?
+");
+$query_acteurs->execute([$id]);
+$acteurs = $query_acteurs->fetchAll();
+
+include 'includes/header.php';
 ?>
 
-<main>
-    <div id="movie-details">
-        <section class="movie-hero" style="display: flex; gap: 40px; padding: 50px; align-items: center;">
-            <img src="<?php echo htmlspecialchars($film['image_url']); ?>" class="details-poster" alt="Affiche" style="width: 350px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-            
-            <div class="details-text">
-                <h1 class="movie-title-header" style="text-align: left; margin: 0;"><?php echo htmlspecialchars($film['titre']); ?></h1>
-                
-                <p class="tagline" style="font-size: 1.2rem; margin: 20px 0;">
-                    Réalisateur : 
-                    <a href="director.php?id=<?php echo $film['realisateur_id']; ?>" style="color:var(--netflix-yellow); text-decoration: none;">
-                        <?php echo htmlspecialchars($film['realisateur_nom']); ?>
-                    </a>
-                </p>
-                
-                <p class="overview" style="color: #ccc; line-height: 1.6; max-width: 600px;">
-                    <?php echo htmlspecialchars($film['description']); ?>
-                </p>
-                
-                <p class="price" style="font-size:2rem; color:var(--netflix-yellow); font-weight: bold; margin: 30px 0;">
-                    <?php echo number_format($film['prix'], 2); ?>€
-                </p>
+<main class="movie-details-main" style="background: #141414; color: white; padding: 60px 20px; min-height: 100vh;">
+    
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; gap: 50px; flex-wrap: wrap;">
+        
+        <div style="flex: 1; min-width: 300px; max-width: 350px;">
+            <div style="height: 500px; background: #222; border-radius: 12px; overflow: hidden; border: 1px solid #333; box-shadow: 0 15px 35px rgba(0,0,0,0.7);">
+                <img src="<?= htmlspecialchars($film['image_url'] ?? '') ?>" 
+                     alt="Affiche"
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
 
-                <form method="POST" action="panier.php">
-                    <input type="hidden" name="film_id" value="<?php echo $film['id']; ?>">
-                    <button type="submit" name="ajouter_panier" class="btn-add-cart" style="padding: 15px 30px; cursor: pointer;">
-                        Ajouter au panier
+        <div style="flex: 2; min-width: 350px;">
+            <h1 class="film-title">
+                <?= htmlspecialchars($film['titre'] ?? 'Sans titre') ?>
+            </h1>
+
+            <p style="font-size: 1.5rem; color: #e50914; font-weight: bold; margin-bottom: 25px;">
+                <?= number_format((float)($film['prix'] ?? 0), 2) ?> €
+            </p>
+            
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #ccc; margin-bottom: 30px;">
+                <?= htmlspecialchars($film['description'] ?? 'Pas de description.') ?>
+            </p>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border-left: 4px solid #e50914; margin-bottom: 30px;">
+                <p><strong>Réalisateur :</strong> <span style="color: #e50914;"><?= htmlspecialchars($film['nom_realisateur']) ?></span></p>
+                <p><strong>Acteurs :</strong> 
+                    <span style="color: #bbb;">
+                        <?php 
+                        $noms = array_map(fn($a) => htmlspecialchars($a['prenom'] . " " . $a['nom']), $acteurs);
+                        echo !empty($noms) ? implode(', ', $noms) : "Non renseigné";
+                        ?>
+                    </span>
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 30px; align-items: center;">
+                <form action="panier.php" method="POST">
+                    <input type="hidden" name="film_id" value="<?= $film['id'] ?>">
+                    <button type="submit" name="ajouter" class="btn-add-cart">
+                        AJOUTER AU PANIER
                     </button>
                 </form>
+
+                <?php if (!empty($film['trailer_id'])): ?>
+                    <a href="#play" class="trailer-link-text">
+                        <span style="font-size: 1.5rem;">▶</span>
+                        <span class="text">BANDE-ANNONCE</span>
+                    </a>
+                <?php endif; ?>
             </div>
-        </section>
+        </div>
     </div>
 </main>
+
+<?php if (!empty($film['trailer_id'])): ?>
+<div id="play" class="modal-netflix">
+    <div class="modal-frame">
+        <a href="#!" class="btn-close" style="color:#fff; text-decoration:none; float:right; margin-bottom:10px;">✖ FERMER</a>
+        <div class="aspect-16-9">
+            <iframe src="https://www.youtube.com/embed/<?= htmlspecialchars($film['trailer_id']) ?>" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
 
 <?php include 'includes/footer.php'; ?>

@@ -47,23 +47,23 @@ INSERT INTO acteurs (nom, prenom, photo_url) VALUES
 ('Sandler', 'Adam', 'https://www.themoviedb.org/person/19292-adam-sandler/150'),
 ('Fox', 'Julia', 'https://www.themoviedb.org/person/2371446-julia-fox/150'),
 ('Collette', 'Toni', 'https://www.themoviedb.org/person/3051-toni-collette/150'),
-('Wolff', 'Alex', 'https://www.themoviedb.org/person/934281-alex-wolff/150');
+('Wolff', 'Alex', 'https://www.themoviedb.org/person/934281-alex-wolff/');
 
 -- 3. FILMS (13)
-INSERT INTO films (titre, description, annee, categorie, prix, image_url, realisateur_id) VALUES
-('Zootopie 2', 'Suite des aventures de Judy Hopps et Nick Wilde dans la métropole animale.', 2025, 'Animation', 12.99, 'https://www.themoviedb.org/movie/1084242-zootopia-2/300x450', 1),
-('Greenland 2 : Migration', 'La famille Garrity doit survivre après l\'apocalypse causée par une comète.', 2026, 'Action', 14.99, 'https://www.themoviedb.org/movie/840464-greenland-2-migration/300x450', 2),
-('Sinners', 'Un thriller gothique avec des éléments surnaturels terrifiants.', 2025, 'Drame', 13.99, 'https://www.themoviedb.org/movie/1233413-sinners/300x450', 3),
-('La Femme de Ménage', 'Un thriller psychologique érotique plein de rebondissements.', 2025, 'Drame', 11.99, 'https://www.themoviedb.org/movie/1368166-the-housemaid/300x450', 4),
-('Anaconda', 'Une comédie d\'action délirante avec un serpent géant.', 2025, 'Action', 10.99, 'https://www.themoviedb.org/movie/1234731-anaconda/300x450', 5),
-('Une bataille après l\'autre', 'Un thriller d\'action intense avec des rebondissements constants.', 2025, 'Action', 13.99, 'https://www.themoviedb.org/movie/1054867-one-battle-after-another/300x450', 6),
-('Ella McCay', 'Une comédie dramatique touchante sur la rédemption.', 2025, 'Drame', 12.99, 'https://www.themoviedb.org/movie/1206008-ella-mccay/300x450', 7),
-('Send Help', 'Un film d\'horreur qui vous fera frissonner.', 2026, 'Horreur', 14.99, 'https://www.themoviedb.org/movie/1198994-send-help/300x450', 8),
-('L\'Art du faux', 'Un film d\'action sur le monde de la contrefaçon artistique.', 2025, 'Action', 11.99, 'https://www.themoviedb.org/movie/1443762-il-falsario/300x450', 9),
-('Kaguya, princesse cosmique', 'Un film d\'animation poétique inspiré du conte japonais.', 2026, 'Animation', 15.99, 'https://www.themoviedb.org/movie/1575337/300x450', 10),
-('Reconnu coupable', 'Un thriller judiciaire captivant plein de suspense.', 2026, 'Drame', 13.99, 'https://www.themoviedb.org/movie/1236153-mercy/300x450', 11),
-('Marty Supreme', 'Un drame sportif inspirant sur le tennis de table.', 2025, 'Drame', 12.99, 'https://www.themoviedb.org/movie/1317288-marty-supreme/300x450', 12),
-('The Rip', 'Un thriller haletant qui vous tiendra en haleine jusqu\'à la fin.', 2026, 'Action', 14.99, 'https://www.themoviedb.org/movie/1306368-the-rip/300x450', 13);
+INSERT INTO films (titre, description, annee, categorie, prix, image_url, realisateur_id, trailer_id) VALUES
+('Zootopie 2', 'Suite des aventures de Judy Hopps et Nick Wilde dans la métropole animale.', 2025, 'Animation', 12.99, 'https://bohmtheatre.org/wp-content/uploads/2025/09/2ootopia.jpg, 1, 5AwtptT8X8k),
+('Greenland 2 : Migration', 'La famille Garrity doit survivre après l\'apocalypse causée par une comète.', 2026, 'Action', 14.99, 'https://bohmtheatre.org/wp-content/uploads/2025/09/2ootopia.jpg, 2, hiD3zk0ZRFg),
+('Sinners', 'Un thriller gothique avec des éléments surnaturels terrifiants.', 2025, 'Drame', 13.99, 'https://media.services.cinergy.ch/media/box1600/db66e0f2dc91230f2c48e921d59b261e62ed7dd5.jpg', 3, bKGxHflevuk ),
+('La Femme de Ménage', 'Un thriller psychologique érotique plein de rebondissements.', 2025, 'Drame', 11.99, 'https://fr.web.img5.acsta.net/r_1920_1080/img/ed/a3/eda3bba832e22c79ea22117b058f84e5.jpg', 4, H6-M7G3eFdk),
+('Anaconda', 'Une comédie d\'action délirante avec un serpent géant.', 2025, 'Action', 10.99, 'https://fr.web.img6.acsta.net/r_1920_1080/img/20/af/20afc1b148d574dca07ec228be9ac869.jpg', 5, _7gfE_pBN1E),
+('Une bataille après l\'autre', 'Un thriller d\'action intense avec des rebondissements constants.', 2025, 'Action', 13.99, 'https://fr.web.img2.acsta.net/r_1920_1080/img/61/0d/610dc2fcd83afe3717f771b889b979c2.jpg', 6, 0yXndop7g4Q),
+('Ella McCay', 'Une comédie dramatique touchante sur la rédemption.', 2025, 'Drame', 12.99, 'https://fr.web.img5.acsta.net/r_1920_1080/img/9a/07/9a07f6da3924c9f969ce7d91fa75e6db.jpg', 7, wuuqf7GK78M),
+('Send Help', 'Un film d\'horreur qui vous fera frissonner.', 2026, 'Horreur', 14.99, 'https://fr.web.img4.acsta.net/r_1920_1080/img/2a/2c/2a2cebc69a11f9ce0da6eeec4ca36e03.jpg', 8, NbfutLKRqjQ),
+('L\'Art du faux', 'Un film d\'action sur le monde de la contrefaçon artistique.', 2025, 'Action', 11.99, 'https://fr.web.img6.acsta.net/r_1920_1080/img/3a/fe/3afec531e4a51fb10729d66d3c85ddfc.jpg', 9, KAXwdY3ei7c),
+('Kaguya, princesse cosmique', 'Un film d\'animation poétique inspiré du conte japonais.', 2026, 'Animation', 15.99, 'https://fr.web.img2.acsta.net/r_1920_1080/img/fe/26/fe26623803f8363e031662bf9e1eabfc.jpg', 10, monIY8lb8NE),
+('Reconnu coupable', 'Un thriller judiciaire captivant plein de suspense.', 2026, 'Drame', 13.99, 'https://fr.web.img3.acsta.net/r_1920_1080/img/7d/cb/7dcb8416ab4e8fd4ff6eeaed758c6004.jpg', 11, O7ocCijaVQg),
+('Marty Supreme', 'Un drame sportif inspirant sur le tennis de table.', 2025, 'Drame', 12.99, 'https://fr.web.img6.acsta.net/r_1920_1080/img/83/18/8318c06373acd968023aa5afab9c2ae6.jpg', 12, wgTP_92-I38),
+('The Rip', 'Un thriller haletant qui vous tiendra en haleine jusqu\'à la fin.', 2026, 'Action', 14.99, 'https://fr.web.img6.acsta.net/r_1920_1080/img/23/1c/231ca583fb55f34f0d1ddcd61db4d29f.jpg', 13, OMeOauwYjRs);
 
 -- 4. LIAISON FILMS-ACTEURS (26 relations)
 INSERT INTO films_acteurs (film_id, acteur_id) VALUES

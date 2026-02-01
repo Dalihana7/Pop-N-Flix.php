@@ -27,6 +27,8 @@ CREATE TABLE films (
     image_url VARCHAR(255),
     realisateur_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    categorie VARCHAR(100) DEFAULT NULL,
+    trailer_id VARCHAR(100) DEFAULT NULL
     FOREIGN KEY (realisateur_id) REFERENCES realisateurs(id) ON DELETE SET NULL
 );
 

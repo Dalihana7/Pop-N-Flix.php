@@ -97,12 +97,10 @@ $total = 0;
 foreach ($films_panier as $film) {
     $total += $film['prix'];
 }
-?>
-
-include 'includes/header.php'; 
-?>
+?><?php include 'includes/header.php'; ?>
 
 <main>
+
     <h2 class="section-title">Mon Panier</h2>
     <div class="grid-separator"></div>
 

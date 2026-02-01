@@ -25,8 +25,7 @@ $stmt->execute([$utilisateur_id]);
 $commandes = $stmt->fetchAll();
 ?>
 
-include 'includes/header.php'; 
-?>
+<?php include 'includes/header.php'; ?>
 
 <main>
     <h2 class="section-title">Historique de mes achats</h2>

@@ -22,7 +22,7 @@ if (!empty($search)) {
     $films = $query->fetchAll();
 }
 
-include 'includes/header.php'; 
+include 'includes/header.php';
 ?>
 
 <main>
