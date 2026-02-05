@@ -83,6 +83,13 @@ INSERT INTO films_acteurs (film_id, acteur_id) VALUES
 (11, 21), (11, 22),
 (12, 23), (12, 24),
 (13, 25), (13, 26);
+(14, 18), (12, 9),
+(15, 17), (15, 14),
+(16,11), (16,12),
+(17,5), (17,3),
+(18,19), (18,6),
+(19,5), (19,12),
+(20,2), (20,17);
 
 -- Nombre de réalisateurs
 SELECT COUNT(*) FROM realisateurs;
