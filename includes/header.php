@@ -25,8 +25,6 @@
                     <div class="dropdown-menu">
                         <a href="category.php?type=Action">Action</a>
                         <a href="category.php?type=Drame">Drame</a>
-                        <a href="category.php?type=Horreur">Horreur</a>
-                        <a href="category.php?type=Animation">Animation</a>
                     </div>
                 </div>
                 
