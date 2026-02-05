@@ -1,8 +1,4 @@
-CREATE USER 'imdb_user'@'localhost' IDENTIFIED BY '';
-GRANT ALL PRIVILEGES ON imdb_movies.* TO 'imdb_user'@'localhost';
-FLUSH PRIVILEGES;
-
--- INSERTION COMPLÈTE DES DONNÉES
+s-- INSERTION COMPLÈTE DES DONNÉES
 
 -- 1. RÉALISATEURS (13)
 INSERT INTO realisateurs (nom, bio, photo_url) VALUES
