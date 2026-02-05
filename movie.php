@@ -5,7 +5,9 @@ require_once 'config/database.php';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 $stmt = $pdo->prepare("
-    SELECT films.*, IFNULL(realisateurs.nom, 'Inconnu') AS nom_realisateur 
+    SELECT films.*, 
+           IFNULL(realisateurs.nom, 'Inconnu') AS nom_realisateur,
+           realisateurs.url_tmdb AS realisateur_url
     FROM films 
     LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id 
     WHERE films.id = ?
@@ -55,7 +57,17 @@ include 'includes/header.php';
             </p>
 
             <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border-left: 4px solid #e50914; margin-bottom: 30px;">
-                <p><strong>Réalisateur :</strong> <span style="color: #e50914;"><?= htmlspecialchars($film['nom_realisateur']) ?></span></p>
+                <p><strong>Réalisateur :</strong> 
+                    <?php if (!empty($film['realisateur_url'])): ?>
+                        <a href="<?= htmlspecialchars($film['realisateur_url']) ?>" target="_blank" style="color: #e50914; text-decoration: none;">
+                            <?= htmlspecialchars($film['nom_realisateur']) ?>
+                        </a>
+                    <?php else: ?>
+                        <a href="realisateurs.php?id=<?= $film['realisateur_id'] ?>" style="color: #e50914; text-decoration: none;">
+                            <?= htmlspecialchars($film['nom_realisateur']) ?>
+                        </a>
+                    <?php endif; ?>
+                </p>
                 <p><strong>Acteurs :</strong> 
                     <span style="color: #bbb;">
                         <?php 
@@ -69,7 +81,7 @@ include 'includes/header.php';
             <div style="display: flex; gap: 30px; align-items: center;">
                 <form action="panier.php" method="POST">
                     <input type="hidden" name="film_id" value="<?= $film['id'] ?>">
-                    <button type="submit" name="ajouter" class="btn-add-cart">
+                    <button type="submit" name="ajouter_panier" class="btn-add-cart">
                         AJOUTER AU PANIER
                     </button>
                 </form>
